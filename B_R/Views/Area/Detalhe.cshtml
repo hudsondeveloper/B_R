@@ -1,0 +1,84 @@
+﻿@model List<B_R.Models.LogArea>
+
+@{
+    ViewBag.titulo = "Detalhe";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#datatableHUD").DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "resultado não encontrado",
+                "sEmptyTable": "Nenhum dado disponivel nesta tabla",
+                "sInfo": "Mostrando registros de _START_ a _END_ de um total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros de 0 a 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+            }, "order": [[4, "asc"]],
+            dom: "Blfrtip",
+            buttons: [
+            
+            ],
+            responsive: true
+        });
+    });
+
+
+</script>
+
+<div>
+    @*<a href="@Url.Action("Cadastrar", "Solicitacao")" class="button special logo">Nova Solicitação</a>*@
+    @*<<a href="@Url.Action("MinhasSolicitacoes","Panel")" class="button special logo">Minhas Solicitações</a>
+        <a href="@Url.Action("TodasSolicitacoes","Panel")" class="button special logo">Todas Solicitações</a>*@
+    @*<a href="@Url.Action("Cadastrar","Area")" class="button special logo">Nova Área</a>*@
+    <table id="datatableHUD" class="hover" style="width:100%">
+        <thead>
+            <tr style="background-color:white">
+                <th>USUÁRIO</th>
+                <th> AÇÃO</th>
+                <th> ANTERIOR</th>
+                <th> ATUAL</th>
+                <th>HOARÁRIO</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.acao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.anterior)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.alteracao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horario)
+                </td>
+            </tr>
+            }
+
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+</div>
+
+<script>
+
+</script>
+
+
+

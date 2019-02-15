@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.titulo = "Anexo";
+    var idArea = Session["areaid"];
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#datatableHUD").DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "resultado não encontrado",
+                "sEmptyTable": "Nenhum dado disponivel nesta tabla",
+                "sInfo": "Mostrando registros de _START_ a _END_ de um total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros de 0 a 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+            }, "order": [[0, "desc"]],
+            dom: "Blfrtip",
+            buttons: [
+      
+            ],
+            responsive: true
+        });
+    });
+
+
+</script>
+
+<form action="@Url.Action("UploadFile", "Equipamento", new { id = @Session["idequip"], idarea = @Session["areaid"] })" enctype="multipart/form-data" method="post" style="display:grid;margin-bottom:2%;">
+    <div class="form-group">
+
+        <div>
+            @Html.TextBox("file", "", new { type = "file", style = "color: #6aba8e;" }) <br />
+       
+
+            <input type="submit" value="Upload" />
+
+            @ViewBag.Message
+
+        </div>
+        @*<input type="submit" value="Pesquisar" class="col-md-3 col-sm-3 col-xs-3 " />*@
+    </div>
+</form>
+
+
+<div>
+
+    @model List<string>
+
+    <table id="datatableHUD" class="hover" style="width:100%">
+        <thead>
+            <tr style="background-color:white">
+                <th>Nome</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item </td>
+
+                @*@Html.ActionLink("Download", "Download", new { ImageName = item, id = @Session["idequip"], idarea = @Session["areaid"] })*@
+                <td>
+                    <a href="@Url.Action("Download","Equipamento" , new { ImageName = item, id = @Session["idequip"], idarea = @Session["areaid"] })" style="box-shadow:none"><i class="fa fa-download" title="download"></i></a>
+                </td>
+            </tr>
+
+            }
+
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+</div>
+
+<script>
+
+</script>
+
+
+
+
+
+
+

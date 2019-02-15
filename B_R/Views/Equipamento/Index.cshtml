@@ -1,0 +1,130 @@
+﻿@model IEnumerable<B_R.Models.Equipamento>
+
+@{
+    ViewBag.titulo = "Equipamentos";
+    var idArea = Session["idArea"];
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#datatableHUD").DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "resultado não encontrado",
+                "sEmptyTable": "Nenhum dado disponivel nesta tabla",
+                "sInfo": "Mostrando registros de _START_ a _END_ de um total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros de 0 a 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+            }, "order": [[0, "desc"]],
+            dom: "Blfrtip",
+            buttons: [
+       
+            ],
+            responsive: true
+        });
+    });
+
+
+</script>
+<form action="@Url.Action("Index","Equipamento")" method="post" style="display:grid;margin-bottom:2%;">
+    <div class="form-group">
+
+        <div class="col-md-3 col-sm-3 col-xs-3">
+            <select class="form-control" name="id" id="id">
+                <option value="" selected>ÁREA</option>
+                @foreach (var area in ViewBag.area)
+                {
+                    <option value="@area.Id">@area.codigo  @area.nome</option>
+                }
+            </select>
+        </div>
+
+
+        <div class="col-md-3 col-sm-3 col-xs-3">
+            <select class="form-control" name="situacao" id="situacao">
+                <option value="" selected>SITUAÇÃO</option>
+                <option value="ATIVO">ATIVO</option>
+                <option value="FORA_DE_OPERACAO">FORA DE OPERACAO</option>
+                <option value="EM_MONTAGEM">EM MONTAGEM</option>
+                <option value="DESATIVADA">DESATIVADA</option>
+            </select>
+        </div>
+        <input type="submit" value="Pesquisar" class="col-md-3 col-sm-3 col-xs-3 " />
+    </div>
+</form>
+<a href="@Url.Action("Cadastrar","Equipamento")" class="btn btn-app" style="width:100%">
+    <i class="fa fa-edit"></i> Adicionar
+</a>
+<div>
+
+    <table id="datatableHUD" class="hover" style="width:100%">
+        <thead>
+            <tr style="background-color:white">
+                <th>Reg</th>
+                <th>Tag</th>
+                <th>Descri. Equip.</th>
+                <th>Área</th>
+                <th>Situação</th>
+                <th>Doc. Status</th>
+                <th>Descrição</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.reg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tag)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descricao_equipamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.area.codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.situacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status_Doc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descricao)
+                </td>
+             
+                <td>
+                    <a href="@Url.Action("Editar","Equipamento" ,new { id = item.Id })" style="box-shadow:none"><i style="color: #65ab81;" title="editar" class="fa fa-edit fa-2x"></i></a>
+
+                    <a href="@Url.Action("Detalhe","Equipamento",new { id = item.Id })" style="box-shadow:none"><i style="color: #65ab81" ; title="historico" class="fa fa-archive fa-2x"></i></a>
+
+                    <a href="@Url.Action("Comentario","Equipamento",new { id = item.Id })" style="box-shadow:none"><i style="color: #65ab81" ; title="comentario" class="fa fa-file fa-2x"></i></a>
+
+                    <a href="@Url.Action("UploadFile","Equipamento",new {idequip = item.Id,idarea = item.area.Id })" style="box-shadow:none"><i style="color: #65ab81;" title="imagen" class="fa fa-download fa-2x"></i></a>
+                </td>
+            </tr>
+
+            }
+
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+</div>
+
+<script>
+
+</script>
+
+
+

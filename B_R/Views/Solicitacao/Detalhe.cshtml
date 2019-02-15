@@ -1,0 +1,83 @@
+﻿@model List<B_R.Models.RespSolicitacao>
+
+@{
+    ViewBag.titulo = "Historico";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#datatableHUD").DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "resultado não encontrado",
+                "sEmptyTable": "Nenhum dado disponivel nesta tabla",
+                "sInfo": "Mostrando registros de _START_ a _END_ de um total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros de 0 a 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+            },
+            dom: "Blfrtip",
+            buttons: [
+              
+            ],
+            responsive: true
+        });
+    });
+
+
+</script>
+
+<a href="@Url.Action("RespSolicitacao","Solicitacao",new {id = Model.FirstOrDefault().solicitacao.Id })" class="btn btn-app" style="width:100%">
+    <i class="fa fa-edit"></i> Adicionar Comentário
+</a>
+<div>
+    <table id="datatableHUD" class="hover" style="width:100%">
+        <thead>
+            <tr style="background-color:white">
+                <th>Solicitante</th>
+                <th>Setor</th>
+                <th>Descrição</th>
+                <th>Estado</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.solicitante.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.setor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.situacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horario)
+                </td>
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+</div>
+
+<script>
+
+</script>
+
+
+
+

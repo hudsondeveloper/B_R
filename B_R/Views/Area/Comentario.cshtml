@@ -1,0 +1,77 @@
+﻿@model B_R.Models.Area
+
+@{
+    ViewBag.titulo = "Comentarios";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#datatableHUD").DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "resultado não encontrado",
+                "sEmptyTable": "Nenhum dado disponivel nesta tabla",
+                "sInfo": "Mostrando registros de _START_ a _END_ de um total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros de 0 a 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+            },
+            dom: "Blfrtip",
+            buttons: [
+             
+            ],
+            responsive: true
+        });
+    });
+
+
+</script>
+
+<a href="@Url.Action("CadastrarComentario","Area",new { id = Model.Id})" class="btn btn-app" style="width:100%">
+    <i class="fa fa-edit"></i> Adicionar
+</a>
+<div>
+    @*<a href="@Url.Action("Cadastrar", "Solicitacao")" class="button special logo">Nova Solicitação</a>*@
+    @*<<a href="@Url.Action("MinhasSolicitacoes","Panel")" class="button special logo">Minhas Solicitações</a>
+        <a href="@Url.Action("TodasSolicitacoes","Panel")" class="button special logo">Todas Solicitações</a>*@
+    @*<a href="@Url.Action("Cadastrar","Area")" class="button special logo">Nova Área</a>*@
+    <table id="datatableHUD" class="hover" style="width:100%">
+        <thead>
+            <tr style="background-color:white">
+                <th> Usuário</th>
+                <th>Comentario</th>
+                <th>Horário</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ComentariosArea)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horario)
+                </td>
+            </tr>
+
+            }
+
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+</div>
+
+<script>
+
+</script>

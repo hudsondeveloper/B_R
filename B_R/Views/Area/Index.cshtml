@@ -1,0 +1,84 @@
+﻿@model IEnumerable<B_R.Models.Area>
+
+@{
+    ViewBag.titulo = "Área";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#datatableHUD").DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "resultado não encontrado",
+                "sEmptyTable": "Nenhum dado disponivel nesta tabla",
+                "sInfo": "Mostrando registros de _START_ a _END_ de um total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros de 0 a 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+            },
+            dom: "Blfrtip",
+            buttons: [
+             
+            ],
+            responsive: true
+        });
+    });
+
+
+</script>
+
+<a href="@Url.Action("Cadastrar","Area")" class="btn btn-app" style="width:100%">
+    <i class="fa fa-edit"></i> Adicionar
+</a>
+<div>
+    <table id="datatableHUD" class="hover" style="width:100%">
+        <thead>
+            <tr style="background-color:white">
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nome)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Detalhe","Area",new { id = item.Id })" style="box-shadow:none"><i style="color: #65ab81;" title="historico" class="fa fa-archive fa-2x"></i></a>
+
+                        <a href="@Url.Action("Comentario","Area",new { id = item.Id })" style="box-shadow:none"><i style="color: #65ab81;" title="comentario" class="fa fa-file fa-2x"></i></a>
+
+                        <a href="@Url.Action("Index","Equipamento",new { id = item.Id })" style="box-shadow:none"><i style="color: #65ab81;" title="equipamento" class="fa fa-cogs fa-2x"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+</div>
+
+<script>
+
+</script>
+
+
+
+
+
+
+
+
+

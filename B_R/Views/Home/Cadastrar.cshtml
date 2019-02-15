@@ -1,0 +1,187 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/login/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/login/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body style="background-color: #666666;">
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form" method="post" action="@Url.Action("Cadastrar","Home")">
+                    <span class="login100-form-title p-b-43">
+                        Cadastro
+                    </span>
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid login is required: ex@abc.xyz">
+                        <input class="input100" type="text" name="login" required>
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">login</span>
+                    </div>
+
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid Nome is required: ex@abc.xyz">
+                        <input class="input100" type="text" name="Nome" required>
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Nome</span>
+                    </div>
+
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid Email is required: ex@abc.xyz">
+                        <input class="input100" type="text" name="Email" required>
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Email</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid Sexo is required: ex@abc.xyz">
+                        <select class="input100" name="Sexo" required>
+                            <option value="">- Sexo -</option>
+                            <option value="M">Msculino</option>
+                            <option value="F">Feminino</option>
+                        </select>
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Sexo</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid setor is required: ex@abc.xyz">
+                        <select class="input100" name="setor" required>
+                            <option value="" selected>SELECIONE</option>
+                            <option value="MECANICA">MECANICA</option>
+                            <option value="AUTOMACAO">AUTOMACAO</option>
+                            <option value="ELETRICA">ELETRICA</option>
+                            <option value="CIVIL">CIVIL</option>
+                            <option value="SEGURANÇA">SEGURANÇA</option>
+                            <option value="COMPRAS">COMPRAS</option>
+                            <option value="PROJETOS">PROJETOS</option>
+                            <option value="CIPA">CIPA</option>
+                            <option value="TI">TI</option>
+                            <option value="JARDINAGEM">JARDINAGEM</option>
+                            <option value="PINTURA">PINTURA</option>
+                            <option value="RH">RH</option>
+                            <option value="CONTABILIDADE">CONTABILIDADE</option>
+                            <option value="LIMPEZA">LIMPEZA</option>
+                            <option value="BALANÇA">BALANÇA</option>
+                            <option value="ESCRITÓRIO">ESCRITÓRIO</option>
+                            <option value="FATURAMENTO">FATURAMENTO</option>
+                        </select>
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">setor</span>
+                    </div>
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid matricula is required: ex@abc.xyz">
+                        <input class="input100" type="text" name="matricula" required>
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">matricula</span>
+                    </div>
+
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid senha is required: ex@abc.xyz">
+                        <input class="input100" type="password" id="senha" name="senha" required>
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">senha - os seis primeiros digitos do cpf</span>
+                    </div>
+
+
+
+                    <div class="wrap-input100 validate-input" data-validate="confirmar is required">
+                        <input class="input100" type="password" id="confirmar" name="confirmar" required>
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">confirmar senha - os seis primeiros digitos do cpf</span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" onClick="validarSenha()">
+                            Cadastrar
+                        </button>
+                    </div>
+
+                    <div class="text-center p-t-46 p-b-20">
+                        <a href="@Url.Action("Index","Home")" class="txt1">
+                            Login
+                        </a>
+                    </div>
+
+
+                </form>
+
+                <div class="login100-more" style="background-image: url('../Content/images/banner.jpg');">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!--===============================================================================================-->
+    <script src="~/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/login/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/login/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/login/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/login/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/login/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/login/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/login/js/main.js"></script>
+
+</body>
+</html>
+<style>
+    .login100-form {
+
+        padding: 51px 55px 55px 55px;
+    }
+</style>
+
+    <script>
+        function validarSenha() {
+            var NovaSenha = document.getElementById('senha');
+            var CNovaSenha = document.getElementById('confirmar');
+
+            if (NovaSenha.value != CNovaSenha.value)
+                alert("SENHAS DIFERENTES! FAVOR DIGITAR SENHAS IGUAIS");
+        }
+    </script>
+
+
+ 
