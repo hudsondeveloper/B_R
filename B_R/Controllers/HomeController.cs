@@ -36,7 +36,7 @@ namespace B_R.Controllers
                     Session["user"] = login;
                     user = session.Query<User>().Where(x => x.Login == log && x.senha == senha).FirstOrDefault();
                     session.Close();
-                    return RedirectToAction("PrimeiraPagina", "Panel");
+                    return RedirectToAction("Index", "Panel");
                 }
                 else
                 {

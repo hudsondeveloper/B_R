@@ -20,10 +20,35 @@ namespace B_R.Controllers
     {
         // GET: Panel
         [MinhaAutenticacao]
-        public ActionResult Index(string setor, string situacao)
+        public ActionResult Index(string setor, string situacao, DateTime? dateIni, DateTime? dateFim,string data)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
+                if(data != null)
+                {
+                    data = null;
+                    List<Solicitacao> solicitacoesData = new List<Solicitacao>();
+
+                    if (dateIni != null && dateFim != null)
+                    {
+                        solicitacoesData = session.Query<Solicitacao>().Where(x => x.abertura >= dateIni && x.abertura <= dateFim).ToList();
+                    }
+                    else if (dateIni == null && dateFim != null)
+                    {
+                        solicitacoesData = session.Query<Solicitacao>().Where(x => x.abertura <= dateFim).ToList();
+                    }
+                    else if (dateIni != null && dateFim == null)
+                    {
+                        solicitacoesData = session.Query<Solicitacao>().Where(x => x.abertura >= dateIni).ToList();
+                    }
+                    else
+                    {
+                        solicitacoesData = session.Query<Solicitacao>().ToList();
+                    }
+                    session.Close();
+                    return View(solicitacoesData);
+                }
+
                 List<Solicitacao> solicitacoes = new List<Solicitacao>();
 
                 if (setor != null  && situacao != null && setor != "" && situacao != "")
@@ -46,6 +71,7 @@ namespace B_R.Controllers
                 return View(solicitacoes);
             }
         }
+
 
         public ActionResult PrimeiraPagina()
         {

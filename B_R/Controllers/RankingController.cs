@@ -44,24 +44,24 @@ namespace B_R.Controllers
                 int ti = session.Query<Solicitacao>().Where(x => x.setor == setor.TI).Count();
 
                 List<SetorChamado> setorchamado = new List<SetorChamado>(){
-                    new SetorChamado(){setor = setor.AUTOMACAO, chamado = automacao },
-                    new SetorChamado(){setor = setor.BALANÇA, chamado = balanca },
-                    new SetorChamado(){setor = setor.CIPA, chamado = cipa },
-                    new SetorChamado(){setor = setor.CIVIL, chamado = civil },
-                    new SetorChamado(){setor = setor.COMPRAS, chamado = compras },
-                    new SetorChamado(){setor = setor.CONTABILIDADE, chamado = contabilidade },
-                    new SetorChamado(){setor = setor.ELETRICA, chamado = eletrica },
-                    new SetorChamado(){setor = setor.ESCRITÓRIO, chamado = escritorio },
-                    new SetorChamado(){setor = setor.FATURAMENTO, chamado = faturamento },
-                    new SetorChamado(){setor = setor.JARDINAGEM, chamado = jardinagem },
-                    new SetorChamado(){setor = setor.LIMPEZA, chamado = limpeza },
-                    new SetorChamado(){setor = setor.MECANICA, chamado = mecanica },
-                    new SetorChamado(){setor = setor.OPERAÇÃO, chamado = operacao },
-                    new SetorChamado(){setor = setor.PINTURA, chamado = pintura },
-                    new SetorChamado(){setor = setor.PROJETOS, chamado = projetos },
-                    new SetorChamado(){setor = setor.RH, chamado = rh },
-                    new SetorChamado(){setor = setor.SEGURANÇA, chamado = seguranca },
-                    new SetorChamado(){setor = setor.TI, chamado = ti },
+                    new SetorChamado(){setor = "AUTOMAÇÃO", chamado = automacao },
+                    new SetorChamado(){setor = "BALANÇA", chamado = balanca },
+                    new SetorChamado(){setor = "CIPA", chamado = cipa },
+                    new SetorChamado(){setor = "CIVIL", chamado = civil },
+                    new SetorChamado(){setor = "COMPRAS", chamado = compras },
+                    new SetorChamado(){setor = "CONTABILIDADE", chamado = contabilidade },
+                    new SetorChamado(){setor = "ELÉTRICA", chamado = eletrica },
+                    new SetorChamado(){setor = "ESCRITÓRIO", chamado = escritorio },
+                    new SetorChamado(){setor = "FATURAMENTO", chamado = faturamento },
+                    new SetorChamado(){setor = "JARDINAGEM", chamado = jardinagem },
+                    new SetorChamado(){setor = "LIMPEZA", chamado = limpeza },
+                    new SetorChamado(){setor = "MECÂNICA", chamado = mecanica },
+                    new SetorChamado(){setor = "OPERAÇÃO", chamado = operacao },
+                    new SetorChamado(){setor = "PINTURA", chamado = pintura },
+                    new SetorChamado(){setor = "PROJETOS", chamado = projetos },
+                    new SetorChamado(){setor = "RH", chamado = rh },
+                    new SetorChamado(){setor = "SEGURANÇA", chamado = seguranca },
+                    new SetorChamado(){setor = "TI", chamado = ti },
                 };
 
                 session.Close();
@@ -71,23 +71,95 @@ namespace B_R.Controllers
           
         }
 
-        public class SetorChamado
-        {
-            public virtual setor setor { get; set; }
-            public virtual int chamado { get; set; }
-        }
 
         // GET: Ranking
         public ActionResult Equipamento()
         {
-            return View();
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                List<EquipamentoChamado> equipamentos = new List<EquipamentoChamado>();
+                var results = from p in session.Query<Solicitacao>()
+                              group p.equipamento.descricao_equipamento by p.equipamento.Id into g
+                              select new { PersonId = g.Key, solicitacoes = g.ToList() };
+
+                foreach (var item in results)
+                {
+                    EquipamentoChamado equipamento = new EquipamentoChamado();
+                    equipamento.equipamento = item.solicitacoes.FirstOrDefault();
+                    equipamento.chamado = item.solicitacoes.Count();
+                    equipamentos.Add(equipamento);
+                };
+                session.Close();
+                return View(equipamentos);
+            }
         }
 
         // GET: Ranking
         public ActionResult Usuario()
         {
-            return View();
+
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                List<UsuarioChamado> usuarios = new List<UsuarioChamado>();
+            var results = from p in session.Query<Solicitacao>()
+                          group p.solicitante.Nome by p.solicitante.Id into g
+                          select new { PersonId = g.Key, solicitacoes = g.ToList() };
+
+                foreach(var item in results)
+                {
+                    UsuarioChamado user = new UsuarioChamado();
+                     user.usuairo = item.solicitacoes.FirstOrDefault();
+                    user.chamado = item.solicitacoes.Count();
+                    usuarios.Add(user);
+       };
+                session.Close();
+                return View(usuarios);
+            }
         }
 
+        //public ActionResult UsuarioSemanal()
+        //{
+
+
+        //    DateTime data = DateTime.Now.AddDays(-7);
+        //    DateTime data1 = DateTime.Now.AddDays(7);
+        //    using (ISession session = NHibernateHelper.OpenSession())
+        //    {
+        //        List<UsuarioChamado> usuarios = new List<UsuarioChamado>();
+        //        var results = from p in session.Query<Solicitacao>().Where(x=>x.abertura < DateTime.Now.AddDays(-7) && x.abertura > DateTime.Now.AddDays(7))
+        //                      group p.solicitante.Nome by p.solicitante.Id into g
+        //                      select new { PersonId = g.Key, solicitacoes = g.ToList() };
+
+        //        foreach (var item in results)
+        //        {
+        //            UsuarioChamado user = new UsuarioChamado();
+        //            user.usuairo = item.solicitacoes.FirstOrDefault();
+        //            user.chamado = item.solicitacoes.Count();
+        //            usuarios.Add(user);
+        //        };
+        //        session.Close();
+        //        return View(usuarios);
+        //    }
+        //}
+
+        public class UsuarioChamado
+        {
+            public virtual string usuairo { get; set; }
+            public virtual int chamado { get; set; }
+        }
+
+
+        public class EquipamentoChamado
+        {
+            public virtual string equipamento { get; set; }
+            public virtual int chamado { get; set; }
+        }
+
+
+        public class SetorChamado
+        {
+            public virtual String setor { get; set; }
+            public virtual int chamado { get; set; }
+        }
     }
 }

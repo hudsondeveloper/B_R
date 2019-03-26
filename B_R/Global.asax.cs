@@ -18,15 +18,10 @@ namespace B_R
 
         protected void Session_End(Object sender, EventArgs e)
         {
-            Application["ContadorAcessos"] = (int)(Application["ContadorAcessos"]) - 1;
+
         }
 
-        protected void Session_Start(object sender, EventArgs e)
-        {
-            Application.Lock();
-            Application["UsersOnline"] = (int)Application["UsersOnline"] - 1;
-            Application.UnLock();
-        }
+ 
 
         protected void Application_Start()
         {
@@ -34,15 +29,9 @@ namespace B_R
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Application["UsersOnline"] = 0;
+
         }
 
-        public void Session_OnStart()
-        {
-            Application.Lock();
-            Application["UsersOnline"] = (int)Application["UsersOnline"] + 1;
-            Application.UnLock();
-        }
 
 
         //    Application["usuarios"] = 0;

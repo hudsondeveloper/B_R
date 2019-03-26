@@ -48,7 +48,7 @@
     <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
     <script type="text/javascript">
         jQuery(window).load(function ($) {
-            atualizaRelogio();
+           // atualizaRelogio();
         });
     </script>
 </head>
@@ -59,7 +59,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view" style="background-image: url('../Content/images/banner.jpg');min-height:1000PX">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-dashboard"></i> <span>BRASIL REFINO</span></a>
+                        <a href="index.html" class="site_title"><img src="~/Content/images/Logo-Brasil-Refino.png" height="47px"> <span>BRASIL REFINO</span></a>
                     </div>
                     <div class="clearfix"></div>
                     <br />
@@ -70,7 +70,7 @@
                             <h3>Menu</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="@Url.Action("PrimeiraPagina", "Panel")"><i class="fa fa-home"></i> inicio </a>
+                                    <a href="@Url.Action("Index", "Panel")"><i class="fa fa-home"></i> inicio </a>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-send"></i> Solicitação <span class="fa fa-chevron-down"></span></a>
@@ -83,26 +83,26 @@
                                     <a><i class="fa fa-file-text"></i> Ranking <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="@Url.Action("Setor", "Ranking")">Setor</a></li>
-                                        <li><a href="#">Equipamento</a></li>
-                                        <li><a href="#">Usuário</a></li>
+                                        <li><a href="@Url.Action("Equipamento", "Ranking")">Equipamento</a></li>
+                                        <li><a href="@Url.Action("Usuario", "Ranking")">Usuário</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-file-text"></i> Relatorios <span class="fa fa-chevron-down"></span></a>
+                                    @*<a><i class="fa fa-file-text"></i> Relatorios <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="#">Inspeções</a></li>
+                                        <li><a href="@Url.Action("Index","Relatorio")">Inspeções</a></li>
                                         <li><a href="#">Recomendações</a></li>
                                     </ul>
-                                </li>
+                                </li>*@
                                 <li>
                                     <a href="#"><i class="fa fa-desktop"></i> Plano de Inspeção </a>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-plus-square"></i> Cadastros <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="#">Setor</a></li>
+                                        @*<li><a href="#">Setor</a></li>*@
                                         <li><a href="@Url.Action("Index","Equipamento")">Equipamento</a></li>
-                                        <li><a href="#">Modalidade</a></li>
+                                        @*<li><a href="#">Modalidade</a></li>*@
                                         <li><a href="@Url.Action("Index","Area")">Área</a></li>
                                     </ul>
                                 </li>
